@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="urn:beans.liken.greatbit.com"
+           targetNamespace="urn:beans.liken.greatbit.com"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+           xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance"
+           jaxb:extensionBindingPrefixes="inheritance"
+           jaxb:version="2.1"
+           elementFormDefault="qualified">
+
+    <xs:element name="launch" type="Launch" />
+    <xs:complexType name="Launch">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+            <xs:element name="externalId" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="createdTime" type="xs:long"/>
+            <xs:element name="lastModifiedTime" type="xs:long"/>
+            <xs:element name="deleted" type="xs:boolean"/>
+            <xs:element name="createdBy" type="xs:string"/>
+            <xs:element name="lastModifiedBy" type="xs:string"/>
+            <xs:element name="status" type="LaunchStatus"/>
+            <xs:element name="baseUrlA" type="xs:string"/>
+            <xs:element name="baseUrlB" type="xs:string"/>
+            <xs:element name="paramsA" type="xs:string"/>
+            <xs:element name="paramsB" type="xs:string"/>
+            <xs:element name="testcases" type="Testcase"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="testcase" type="Testcase" />
+    <xs:complexType name="Testcase">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+            <xs:element name="uuid" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="status" type="LaunchStatus"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="url" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="launchStatus" type="LaunchStatus"/>
+    <xs:simpleType name="LaunchStatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="RUNNABLE"/>
+            <xs:enumeration value="RUNNING"/>
+            <xs:enumeration value="FAILED"/>
+            <xs:enumeration value="BROKEN"/>
+            <xs:enumeration value="PASSED"/>
+            <xs:enumeration value="SKIPPED"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+</xs:schema>
