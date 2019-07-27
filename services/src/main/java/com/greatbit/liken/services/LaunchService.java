@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -43,10 +44,10 @@ public class LaunchService {
         }
     }
 
-    public void delete(String launchId){
+    public void delete(HttpServletRequest request, String launchId){
         Launch launch = repository.findById(launchId).orElseThrow(EntityNotFoundException::new);
         launch.setDeleted(true);
-        deleteExternal(launchId);
+        deleteExternal(request, launchId);
         update(launch);
     }
 
@@ -58,14 +59,14 @@ public class LaunchService {
         return repository.findAll(PageRequest.of(page, size, directrion, sortByField));
     }
 
-    public Launch updateTestcaseStatus(String launchId, String testcaseUUID, LaunchStatus status){
+    public Launch updateTestcaseStatus(HttpServletRequest request, String launchId, String testcaseUUID, LaunchStatus status){
         ILock lock = hazelcastInstance.getLock(launchId);
         try{
             lock.lock(launchLockTimeout, TimeUnit.MILLISECONDS);
             Launch launch = repository.findById(launchId).orElseThrow(EntityNotFoundException::new);
             launch.getTestcases().stream().filter(testcase -> testcase.getUuid().equals(testcaseUUID)).
                     forEach(testcase -> {
-                        updateExternalTestcaseStatus(launch, testcaseUUID, status);
+                        updateExternalTestcaseStatus(request, launch, testcaseUUID, status);
                         testcase.setStatus(status);
                     });
             launch.setLastModifiedTime(System.currentTimeMillis());
@@ -76,11 +77,11 @@ public class LaunchService {
 
     }
 
-    private void updateExternalTestcaseStatus(Launch launch, String testcaseUUID, LaunchStatus status) {
+    private void updateExternalTestcaseStatus(HttpServletRequest request, Launch launch, String testcaseUUID, LaunchStatus status) {
         //ToDO: safely call plugins
     }
 
-    private void deleteExternal(String launchId) {
+    private void deleteExternal(HttpServletRequest request, String launchId) {
         //ToDO: safely remove launch
     }
 }

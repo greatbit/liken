@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
 
 @RestController
@@ -43,14 +44,17 @@ public class LaunchResource extends BaseResource{
     }
 
     @PostMapping(value = "/{launchId}/{testcaseUUID}",  produces = "application/json")
-    public Launch updateTestcaseStatus(@PathParam("launchId") String launchId, @PathParam("testcaseUUID") String testcaseUUIDe,
-                                             @RequestParam("status") LaunchStatus status){
-        return launchService.updateTestcaseStatus(launchId, testcaseUUIDe, status);
+    public Launch updateTestcaseStatus(@PathParam("launchId") String launchId,
+                                       @PathParam("testcaseUUID") String testcaseUUIDe,
+                                       @RequestParam("status") LaunchStatus status,
+                                       HttpServletRequest request){
+        return launchService.updateTestcaseStatus(request, launchId, testcaseUUIDe, status);
     }
 
     @DeleteMapping(value = "/{launchId}/{testcaseUUID}")
-    public void deleteLaunch(@PathParam("launchId") String launchId){
-        launchService.delete(launchId);
+    public void deleteLaunch(@PathParam("launchId") String launchId,
+                             HttpServletRequest request){
+        launchService.delete(request, launchId);
     }
 
 }
