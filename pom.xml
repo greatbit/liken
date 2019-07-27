@@ -2,12 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.greatbit</groupId>
+    <groupId>com.greatbit.liken</groupId>
     <artifactId>liken</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>beans</module>
         <module>dal</module>
+        <module>external-plugin</module>
         <module>services</module>
         <module>web</module>
     </modules>
@@ -60,6 +61,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>dal</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>external-plugin</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -162,6 +168,12 @@
                 <groupId>ru.greatbit.whoru</groupId>
                 <artifactId>jira-auth-provider</artifactId>
                 <version>${whoru.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
             </dependency>
 
             <!--Plow-->

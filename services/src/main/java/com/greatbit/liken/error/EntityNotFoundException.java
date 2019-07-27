@@ -1,4 +1,4 @@
-package com.greatbit.liken.services;
+package com.greatbit.liken.error;
 
 public class EntityNotFoundException extends RuntimeException {
     public EntityNotFoundException() {

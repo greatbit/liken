@@ -3,6 +3,8 @@ package com.greatbit.liken.services;
 import com.greatbit.liken.beans.Launch;
 import com.greatbit.liken.beans.LaunchStatus;
 import com.greatbit.liken.dal.LaunchRepository;
+import com.greatbit.liken.error.EntityNotFoundException;
+import com.greatbit.liken.external.LikenExternalServicePlugin;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.ILock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import ru.greatbit.plow.PluginsContainer;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.TimeUnit;
@@ -22,7 +25,10 @@ public class LaunchService {
     private long launchLockTimeout;
 
     @Autowired
-    LaunchRepository repository;
+    private LaunchRepository repository;
+
+    @Autowired
+    private PluginsContainer pluginsContainer;
 
     @Autowired
     private HazelcastInstance hazelcastInstance;
@@ -78,10 +84,12 @@ public class LaunchService {
     }
 
     private void updateExternalTestcaseStatus(HttpServletRequest request, Launch launch, String testcaseUUID, LaunchStatus status) {
-        //ToDO: safely call plugins
+        pluginsContainer.getPlugins(LikenExternalServicePlugin.class).values().
+                forEach(plugin -> plugin.updateExternalTestcaseStatus(request, launch, testcaseUUID, status));
     }
 
     private void deleteExternal(HttpServletRequest request, String launchId) {
-        //ToDO: safely remove launch
+        pluginsContainer.getPlugins(LikenExternalServicePlugin.class).values().
+                forEach(plugin -> plugin.deleteExternal(request, launchId));
     }
 }
