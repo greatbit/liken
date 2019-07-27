@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.websocket.server.PathParam;
 
-import static org.apache.commons.lang3.StringUtils.isEmpty;
-
 @RestController
 @RequestMapping("/launch")
 public class LaunchResource extends BaseResource{
