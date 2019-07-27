@@ -45,6 +45,7 @@
         <jaxb.version>0.11.1</jaxb.version>
         <whoru.version>1.1</whoru.version>
         <spring.boot.version>2.1.6.RELEASE</spring.boot.version>
+        <plow.version>1.4</plow.version>
     </properties>
 
 

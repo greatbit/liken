@@ -30,6 +30,12 @@
             <artifactId>hazelcast-spring</artifactId>
         </dependency>
 
+        <!-- Plugins -->
+        <dependency>
+            <groupId>ru.greatbit.plow</groupId>
+            <artifactId>plow-core</artifactId>
+        </dependency>
+
         <!-- Test -->
         <dependency>
             <groupId>junit</groupId>
@@ -48,9 +54,5 @@
             <artifactId>embedded-services</artifactId>
         </dependency>
     </dependencies>
-
-
-
-
 
 </project>

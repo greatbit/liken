@@ -24,7 +24,7 @@
             <xs:element name="baseUrlB" type="xs:string"/>
             <xs:element name="paramsA" type="xs:string"/>
             <xs:element name="paramsB" type="xs:string"/>
-            <xs:element name="testcases" type="Testcase"/>
+            <xs:element name="testcases" type="Testcase" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 
