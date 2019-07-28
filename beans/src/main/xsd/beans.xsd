@@ -20,10 +20,10 @@
             <xs:element name="createdBy" type="xs:string"/>
             <xs:element name="lastModifiedBy" type="xs:string"/>
             <xs:element name="status" type="LaunchStatus"/>
-            <xs:element name="baseUrlA" type="xs:string"/>
-            <xs:element name="baseUrlB" type="xs:string"/>
             <xs:element name="paramsA" type="xs:string"/>
             <xs:element name="paramsB" type="xs:string"/>
+            <xs:element name="prefixA" type="xs:string"/>
+            <xs:element name="prefixB" type="xs:string"/>
             <xs:element name="testcases" type="Testcase" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
@@ -36,12 +36,8 @@
             <xs:element name="name" type="xs:string"/>
             <xs:element name="status" type="LaunchStatus"/>
             <xs:element name="description" type="xs:string"/>
-            <xs:element name="prefixA" type="xs:string"/>
-            <xs:element name="prefixB" type="xs:string"/>
             <xs:element name="urlA" type="xs:string"/>
             <xs:element name="urlB" type="xs:string"/>
-            <xs:element name="paramsA" type="xs:string"/>
-            <xs:element name="paramsB" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
 
