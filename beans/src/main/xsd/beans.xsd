@@ -13,6 +13,7 @@
         <xs:sequence>
             <xs:element name="id" type="xs:string"/>
             <xs:element name="externalId" type="xs:string"/>
+            <xs:element name="externalUrl" type="xs:string"/>
             <xs:element name="name" type="xs:string"/>
             <xs:element name="createdTime" type="xs:long"/>
             <xs:element name="lastModifiedTime" type="xs:long"/>
@@ -32,6 +33,7 @@
     <xs:complexType name="Testcase">
         <xs:sequence>
             <xs:element name="id" type="xs:string"/>
+            <xs:element name="externalUrl" type="xs:string"/>
             <xs:element name="uuid" type="xs:string"/>
             <xs:element name="name" type="xs:string"/>
             <xs:element name="status" type="LaunchStatus"/>
