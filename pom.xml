@@ -11,6 +11,7 @@
         <module>external-plugin</module>
         <module>services</module>
         <module>web</module>
+        <module>ui</module>
     </modules>
 
     <name>Liken</name>

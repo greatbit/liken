@@ -20,22 +20,22 @@ import javax.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/launch")
-public class LaunchResource extends BaseResource{
+public class LaunchResource {
 
     @Autowired
     private LaunchService launchService;
 
-    @PostMapping(value = "/", produces = "application/json", consumes = "application/json")
+    @PostMapping(produces = "application/json", consumes = "application/json")
     public Launch create(@RequestBody Launch launch){
         return launchService.create(launch);
     }
 
-    @PutMapping(value = "/", produces = "application/json", consumes = "application/json")
+    @PutMapping(produces = "application/json", consumes = "application/json")
     public Launch update(@RequestBody Launch launch){
         return launchService.update(launch);
     }
 
-    @GetMapping(value = "/", produces = "application/json")
+    @GetMapping(produces = "application/json")
     public Page<Launch> getLaunches(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
                                     @RequestParam(name = "size", required = false, defaultValue = "20") int size,
                                     @RequestParam(name = "direction", required = false, defaultValue = "DESC") String direction,
