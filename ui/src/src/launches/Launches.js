@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Header from '../common/Header';
+import Footer from '../common/Footer';
+import Alerts from '../common/Alerts';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import axios from "axios";
@@ -34,22 +37,27 @@ class Launches extends Component {
             Utils.onErrorMessage("Couldn't get launches: ", error);
             this.state.loading = false;
             this.setState(this.state);
-        });
+        }, this);
     }
 
 
     render() {
         return (
           <div>
-            <div className='sweet-loading'>
-                 <FadeLoader
-                   sizeUnit={"px"}
-                   size={100}
-                   color={'#135f38'}
-                   loading={this.state.loading}
-                 />
-               </div>
-              Launch goes here
+              <Header/>
+              <div className='container-fluid'>
+                <Alerts/>
+                <div className='sweet-loading'>
+                     <FadeLoader
+                       sizeUnit={"px"}
+                       size={100}
+                       color={'#135f38'}
+                       loading={this.state.loading}
+                     />
+                   </div>
+                  Launches goe here
+              </div>
+              <Footer/>
           </div>
         );
       }

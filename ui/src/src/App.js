@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Header from './common/Header'
-import Main from './common/Main'
-import Footer from './common/Footer'
+import { Switch, Route } from 'react-router-dom'
+import Launches from './launches/Launches'
+import Launch from './launches/Launch'
+import Testcase from './launches/Testcase'
 import './App.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -16,16 +17,17 @@ class App extends Component {
     }
 
     render() {
-        return (
-          <div>
-            <Header/>
-            <div className="container-fluid">
-                <Main />
-            </div>
-            <Footer />
-          </div>
-
-        );
+        return(
+            <main>
+                <Switch>
+                  <Route exact path='/' component={Launches}/>
+                  <Route exact path='/launch/'
+                      render={(props) => <Launches {...props}  /> }/>
+                  <Route exact path='/launch/:launchId' render={(props) => <Launch {...props} /> }/>
+                  <Route exact path='/launch/:launchId/:testcaseUuid' render={(props) => <Testcase {...props} /> }/>
+                </Switch>
+            </main>
+        )
       }
 
 }

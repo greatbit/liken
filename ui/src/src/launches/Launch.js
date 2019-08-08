@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Alerts from '../common/Alerts';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import axios from "axios";
@@ -13,7 +14,9 @@ class Launch extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            launch: {},
+            launch: {
+                testcases: []
+            },
             loading: true
         };
         this.getLaunch = this.getLaunch.bind(this);
@@ -25,7 +28,7 @@ class Launch extends Component {
 
     getLaunch(){
         axios
-            .get("/api//launch/" + this.props.match.params.launchId)
+            .get("/api/launch/" + this.props.match.params.launchId)
             .then(response => {
                  this.state.launch = response.data;
                  this.state.loading = false;
@@ -40,8 +43,35 @@ class Launch extends Component {
 
     render() {
         return (
-          <div>
+          <div className='container-fluid'>
+            <Alerts/>
             <div className='sweet-loading'>
+                 <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        this.state.launch.testcases.map(function(testcase, i){
+                            return (
+                                   <tr>
+                                       <td>{i}</td>
+                                       <td>
+                                            <Link to={'/launch/' + this.props.match.params.launchId + '/' + testcase.uuid}>
+                                                {testcase.name}
+                                            </Link>
+                                       </td>
+                                       <td>{testcase.status}</td>
+                                   </tr>
+                                   );
+                        }.bind(this))
+                    }
+                    </tbody>
+                 </table>
                  <FadeLoader
                    sizeUnit={"px"}
                    size={100}

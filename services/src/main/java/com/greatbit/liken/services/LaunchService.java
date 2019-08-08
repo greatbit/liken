@@ -2,6 +2,7 @@ package com.greatbit.liken.services;
 
 import com.greatbit.liken.beans.Launch;
 import com.greatbit.liken.beans.LaunchStatus;
+import com.greatbit.liken.beans.Testcase;
 import com.greatbit.liken.dal.LaunchRepository;
 import com.greatbit.liken.error.EntityNotFoundException;
 import com.greatbit.liken.external.LikenExternalServicePlugin;
@@ -65,18 +66,16 @@ public class LaunchService {
         return repository.findAll(PageRequest.of(page, size, directrion, sortByField));
     }
 
-    public Launch updateTestcaseStatus(HttpServletRequest request, String launchId, String testcaseUUID, LaunchStatus status){
+    public Testcase updateTestcaseStatus(HttpServletRequest request, String launchId, String testcaseUUID, LaunchStatus status){
         ILock lock = hazelcastInstance.getLock(launchId);
         try{
             lock.lock(launchLockTimeout, TimeUnit.MILLISECONDS);
+            Testcase testcase = getLaunchTestcase(launchId, testcaseUUID);
             Launch launch = repository.findById(launchId).orElseThrow(EntityNotFoundException::new);
-            launch.getTestcases().stream().filter(testcase -> testcase.getUuid().equals(testcaseUUID)).
-                    forEach(testcase -> {
-                        updateExternalTestcaseStatus(request, launch, testcaseUUID, status);
-                        testcase.setStatus(status);
-                    });
+            testcase.setStatus(status);
             launch.setLastModifiedTime(System.currentTimeMillis());
-            return repository.save(launch);
+            repository.save(launch);
+            return testcase;
         } finally {
             lock.unlock();
         }
@@ -91,5 +90,12 @@ public class LaunchService {
     private void deleteExternal(HttpServletRequest request, String launchId) {
         pluginsContainer.getPlugins(LikenExternalServicePlugin.class).values().
                 forEach(plugin -> plugin.deleteExternal(request, launchId));
+    }
+
+    public Testcase getLaunchTestcase(String launchId, String testcaseUUID){
+        Launch launch = repository.findById(launchId).orElseThrow(EntityNotFoundException::new);
+        return launch.getTestcases().stream().
+                filter(testcase -> testcase.getUuid().equals(testcaseUUID)).
+                findFirst().orElseThrow(EntityNotFoundException::new);
     }
 }
