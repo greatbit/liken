@@ -96,3 +96,12 @@ code {
     cursor: pointer;
 }
 
+.selected-url{
+    background-color: rgba(40, 167, 69, 0.15);
+}
+
+.testcase-head-url{
+    font-size: 0.8em;
+}
+
+

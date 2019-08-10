@@ -68,13 +68,16 @@ class Testcase extends Component {
     switchFrames(){
         $('#frame-a').toggle();
         $('#frame-b').toggle();
+
+        $('#url-a').toggleClass("selected-url");
+        $('#url-b').toggleClass("selected-url");
     }
 
     render() {
         return (
           <div className="container-fluid testcase">
             <nav className="navbar row">
-                <div className="col-2">
+                <div id="url-a" className="col-2 selected-url testcase-head-url">
                     <a href={this.state.testcase.urlA || ""} target="_blank">
                         {this.state.testcase.urlA}
                     </a>
@@ -106,7 +109,7 @@ class Testcase extends Component {
                                 data-toggle="modal" data-target="#remove-testcase-confirmation"/>
                 </div>
 
-                <div className="col-2">
+                <div id="url-b" className="col-2 testcase-head-url">
                     <a href={this.state.testcase.urlB || ""} target="_blank">
                         {this.state.testcase.urlB}
                     </a>
