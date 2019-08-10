@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 import * as Utils from '../common/Utils';
 import { FadeLoader } from 'react-spinners';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+
 
 import $ from 'jquery';
 
@@ -83,7 +86,8 @@ class Testcase extends Component {
                             }.bind(this))
                         }
                     </select>
-                    <span id="info">info</span>
+                    <FontAwesomeIcon icon={faInfoCircle} className="float-right clickable"
+                                data-toggle="modal" data-target="#remove-testcase-confirmation"/>
                 </div>
 
                 <div className="col-2">
@@ -123,6 +127,24 @@ class Testcase extends Component {
             <div id="frame-b" style={{display: 'none'}} className="frame">
               <iframe src={this.state.testcase.urlB} className="frame"></iframe>
             </div>
+
+
+            <div className="modal fade" tabIndex="-1" role="dialog" id="remove-testcase-confirmation">
+                  <div className="modal-dialog" role="document">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5 className="modal-title">{this.state.testcase.name}</h5>
+                          <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div className="modal-body">{this.state.testcase.description}</div>
+                        <div className="modal-footer">
+                          <button type="button" className="btn btn-secondary" data-dismiss="modal" aria-label="Cancel">Close</button>
+                        </div>
+                      </div>
+                   </div>
+               </div>
           </div>
         );
       }

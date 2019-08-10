@@ -92,3 +92,7 @@ code {
     width: 90%;
 }
 
+.clickable{
+    cursor: pointer;
+}
+
