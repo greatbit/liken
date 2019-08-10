@@ -64,41 +64,47 @@ class Testcase extends Component {
     render() {
         return (
           <div className="container-fluid testcase">
-            <nav className="navbar navbar-expand-md navbar-dark">
-                <a href={this.state.testcase.urlA || ""} target="_blank">
-                    {this.state.testcase.urlA}
-                </a>
+            <nav className="navbar row">
+                <div className="col-2">
+                    <a href={this.state.testcase.urlA || ""} target="_blank">
+                        {this.state.testcase.urlA}
+                    </a>
+                </div>
 
-                 <select id="testcases-select">
-                    {
-                        this.state.launch.testcases.map(function(testcase, i){
-                            return (
-                                   <option value={testcase.uuid}>
-                                        {testcase.name}
-                                   </option>
-                                   );
-                        }.bind(this))
-                    }
-                 </select>
-                <span id="info">info</span>
+                <div className="col-4">
+                    <select id="testcases-select">
+                        {
+                            this.state.launch.testcases.map(function(testcase, i){
+                                return (
+                                       <option value={testcase.uuid}>
+                                            {testcase.name}
+                                       </option>
+                                       );
+                            }.bind(this))
+                        }
+                    </select>
+                    <span id="info">info</span>
+                </div>
 
-                <a href={this.state.testcase.urlB || ""} target="_blank">
-                    {this.state.testcase.urlB}
-                </a>
+                <div className="col-2">
+                    <a href={this.state.testcase.urlB || ""} target="_blank">
+                        {this.state.testcase.urlB}
+                    </a>
+                </div>
 
-
-                <button type="button" className="btn button-primary"
-                        onClick={this.switchFrames}>Switch</button>
-
-                <div class="btn-group" role="group">
-                  <button type="button" className="btn button-success"
-                            onClick={(e) => this.updateTestcaseStatus("PASSED", e)}>Pass</button>
-                  <button type="button" className="btn button-danger"
-                            onClick={(e) => this.updateTestcaseStatus("FAILED", e)}>Fail</button>
-                  <button type="button" className="btn button-warning"
-                            onClick={(e) => this.updateTestcaseStatus("BROKEN", e)}>Broken</button>
-                  <button type="button" className="btn button-light"
-                            onClick={(e) => this.updateTestcaseStatus("SKIPPED", e)}>Skip</button>
+                <div className="col-4" >
+                    <button type="button" className="btn btn-primary switch-btn"
+                                onClick={this.switchFrames}>Switch</button>
+                    <div class="btn-group float-right" role="group">
+                      <button type="button" className="btn btn-success"
+                                onClick={(e) => this.updateTestcaseStatus("PASSED", e)}>Pass</button>
+                      <button type="button" className="btn btn-danger"
+                                onClick={(e) => this.updateTestcaseStatus("FAILED", e)}>Fail</button>
+                      <button type="button" className="btn btn-warning"
+                                onClick={(e) => this.updateTestcaseStatus("BROKEN", e)}>Broken</button>
+                      <button type="button" className="btn btn-light"
+                                onClick={(e) => this.updateTestcaseStatus("SKIPPED", e)}>Skip</button>
+                    </div>
                 </div>
 
             </nav>

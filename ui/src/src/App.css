@@ -84,3 +84,11 @@ code {
     width: 100%;
 }
 
+.switch-btn {
+    margin-right: 20px;
+}
+
+#testcases-select{
+    width: 90%;
+}
+
