@@ -23,6 +23,7 @@ class Testcase extends Component {
         };
         this.getTestcase = this.getTestcase.bind(this);
         this.updateTestcaseStatus = this.updateTestcaseStatus.bind(this);
+        this.onSelectTestcase = this.onSelectTestcase.bind(this);
     }
 
     componentDidMount() {
@@ -36,6 +37,7 @@ class Testcase extends Component {
                  this.state.launch = response.data;
                  this.state.testcase = this.state.launch.testcases.find(testcase => testcase.uuid == this.props.match.params.testcaseUuid);
                  this.state.loading = false;
+                 this.updateTestcaseStatus("RUNNING");
                  this.setState(this.state);
         }).catch(error => {
             Utils.onErrorMessage("Couldn't get testcase: ", error);
@@ -50,12 +52,16 @@ class Testcase extends Component {
             .then(response => {
                  this.state.testcase = response.data;
                  this.setState(this.state);
-                 this.getTestcase();
         }).catch(error => {
             Utils.onErrorMessage("Couldn't update testcase status: ", error);
             this.state.loading = false;
             this.setState(this.state);
         });
+    }
+
+    onSelectTestcase(event){
+        this.updateTestcaseStatus("RUNNABLE", event);
+        window.location.href = "/launch/" + this.state.launch.id  + "/" + event.target.value;
     }
 
 
@@ -75,14 +81,24 @@ class Testcase extends Component {
                 </div>
 
                 <div className="col-4">
-                    <select id="testcases-select">
+                    <select id="testcases-select" onChange={this.onSelectTestcase}>
                         {
                             this.state.launch.testcases.map(function(testcase, i){
-                                return (
-                                       <option value={testcase.uuid}>
+                                if (this.state.testcase.uuid == testcase.uuid){
+
+                                    return (
+                                       <option value={testcase.uuid} selected>
                                             {testcase.name}
                                        </option>
-                                       );
+                                    );
+                                } else {
+
+                                    return (
+                                        <option value={testcase.uuid}>
+                                            {testcase.name}
+                                        </option>
+                                    );
+                                }
                             }.bind(this))
                         }
                     </select>
