@@ -69,7 +69,7 @@ public class LaunchResource {
         return launchService.getLaunchTestcase(launchId, testcaseUUIDe);
     }
 
-    @GetMapping(value = "/{launchId}/{testcaseUUID}",  produces = "application/json")
+    @GetMapping(value = "/{launchId}/next",  produces = "application/json")
     public Testcase startNextTestcase(@PathVariable("launchId") String launchId){
         return launchService.startNextRunnableTestcase(launchId);
     }

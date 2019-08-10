@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import ru.greatbit.plow.PluginsContainer;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import static com.greatbit.liken.beans.LaunchStatus.RUNNABLE;
@@ -38,6 +39,10 @@ public class LaunchService {
     private HazelcastInstance hazelcastInstance;
 
     public Launch create(Launch launch){
+        launch.getTestcases().forEach(testcase -> {
+            testcase.setStatus(testcase.getStatus() == null ? RUNNABLE : testcase.getStatus());
+            testcase.setUuid(testcase.getUuid() == null ? UUID.randomUUID().toString() : testcase.getUuid());
+        });
         repository.save(launch);
         return launch;
     }

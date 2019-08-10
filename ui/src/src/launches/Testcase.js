@@ -24,6 +24,7 @@ class Testcase extends Component {
         this.getTestcase = this.getTestcase.bind(this);
         this.updateTestcaseStatus = this.updateTestcaseStatus.bind(this);
         this.onSelectTestcase = this.onSelectTestcase.bind(this);
+        this.getNextTestcase = this.getNextTestcase.bind(this);
     }
 
     componentDidMount() {
@@ -52,8 +53,27 @@ class Testcase extends Component {
             .then(response => {
                  this.state.testcase = response.data;
                  this.setState(this.state);
+                 if (status != "RUNNING"){
+                    this.getNextTestcase();
+                 }
         }).catch(error => {
             Utils.onErrorMessage("Couldn't update testcase status: ", error);
+            this.state.loading = false;
+            this.setState(this.state);
+        });
+    }
+
+    getNextTestcase(){
+        axios
+            .get("/api/launch/" + this.props.match.params.launchId + "/next")
+            .then(response => {
+                 if (response.data){
+                    window.location.href = "/launch/" + this.state.launch.id  + "/" + response.data.uuid;
+                 } else {
+                     window.location.href = "/launch/" + this.state.launch.id;
+                 }
+        }).catch(error => {
+            Utils.onErrorMessage("Couldn't get next testcase: ", error);
             this.state.loading = false;
             this.setState(this.state);
         });
