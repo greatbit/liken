@@ -75,4 +75,12 @@ code {
     #background-color: #13515f!important;
 }
 
+.testcase {
+  height: 100vh;
+}
+
+.frame {
+    height: 100%;
+    width: 100%;
+}
 

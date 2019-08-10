@@ -42,17 +42,28 @@ class Testcase extends Component {
     }
 
     updateTestcaseStatus(status, event){
-        //ToDO: implement
+         axios
+            .post("/api/launch/" + this.props.match.params.launchId + "/" + this.state.testcase.uuid + "?status=" + status)
+            .then(response => {
+                 this.state.testcase = response.data;
+                 this.setState(this.state);
+                 this.getTestcase();
+        }).catch(error => {
+            Utils.onErrorMessage("Couldn't update testcase status: ", error);
+            this.state.loading = false;
+            this.setState(this.state);
+        });
     }
 
 
     switchFrames(){
-        //ToDO: implement
+        $('#frame-a').toggle();
+        $('#frame-b').toggle();
     }
 
     render() {
         return (
-          <div className='container-fluid'>
+          <div className="container-fluid testcase">
             <nav className="navbar navbar-expand-md navbar-dark">
                 <a href={this.state.testcase.urlA || ""} target="_blank">
                     {this.state.testcase.urlA}
@@ -90,22 +101,22 @@ class Testcase extends Component {
                             onClick={(e) => this.updateTestcaseStatus("SKIPPED", e)}>Skip</button>
                 </div>
 
-              </nav>
+            </nav>
             <Alerts/>
             <div className='sweet-loading'>
-                 <FadeLoader
+               <FadeLoader
                    sizeUnit={"px"}
                    size={100}
                    color={'#135f38'}
                    loading={this.state.loading}
-                 />
-               </div>
-              <div id="frame-a">
-                <iframe src={this.state.testcase.urlA}></iframe>
-              </div>
-              <div id="frame-b">
-                <iframe src={this.state.testcase.urlB}></iframe>
-              </div>
+               />
+            </div>
+            <div id="frame-a" className="frame">
+              <iframe src={this.state.testcase.urlA} className="frame"></iframe>
+            </div>
+            <div id="frame-b" style={{display: 'none'}} className="frame">
+              <iframe src={this.state.testcase.urlB} className="frame"></iframe>
+            </div>
           </div>
         );
       }
