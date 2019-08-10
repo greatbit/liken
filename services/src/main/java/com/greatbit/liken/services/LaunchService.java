@@ -19,6 +19,9 @@ import ru.greatbit.plow.PluginsContainer;
 import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.TimeUnit;
 
+import static com.greatbit.liken.beans.LaunchStatus.RUNNABLE;
+import static com.greatbit.liken.beans.LaunchStatus.RUNNING;
+
 @Service
 public class LaunchService {
 
@@ -97,5 +100,26 @@ public class LaunchService {
         return launch.getTestcases().stream().
                 filter(testcase -> testcase.getUuid().equals(testcaseUUID)).
                 findFirst().orElseThrow(EntityNotFoundException::new);
+    }
+
+    public Testcase startNextRunnableTestcase(String launchId){
+        ILock lock = hazelcastInstance.getLock(launchId);
+        try {
+            lock.lock(launchLockTimeout, TimeUnit.MILLISECONDS);
+            Launch launch = repository.findById(launchId).orElseThrow(EntityNotFoundException::new);
+            Testcase testcase = launch.getTestcases().stream().filter(this::isRunnable).findFirst().orElse(null);
+            if (testcase != null){
+                testcase.setStatus(RUNNING);
+                update(launch);
+            }
+            return testcase;
+        } finally {
+            lock.unlock();
+        }
+
+    }
+
+    private boolean isRunnable(Testcase testcase) {
+        return testcase.getStatus() == RUNNABLE;
     }
 }
