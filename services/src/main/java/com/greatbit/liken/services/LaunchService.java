@@ -85,6 +85,7 @@ public class LaunchService {
             }
             testcase.setStatus(status);
             launch.setLastModifiedTime(System.currentTimeMillis());
+            updateExternalTestcaseStatus(request, launch, testcase.getExternalUuid(), status);
             repository.save(launch);
             return testcase;
         } finally {

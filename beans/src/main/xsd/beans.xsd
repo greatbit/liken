@@ -8,8 +8,8 @@
            jaxb:version="2.1"
            elementFormDefault="qualified">
 
-    <xs:element name="launch" type="Launch" />
-    <xs:complexType name="Launch">
+    <xs:element name="launch" type="BaseLaunch" />
+    <xs:complexType name="BaseLaunch">
         <xs:sequence>
             <xs:element name="id" type="xs:string"/>
             <xs:element name="externalId" type="xs:string"/>
