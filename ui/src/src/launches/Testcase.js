@@ -25,10 +25,16 @@ class Testcase extends Component {
         this.updateTestcaseStatus = this.updateTestcaseStatus.bind(this);
         this.onSelectTestcase = this.onSelectTestcase.bind(this);
         this.getNextTestcase = this.getNextTestcase.bind(this);
+        this.keypressFunction = this.keypressFunction.bind(this);
     }
 
     componentDidMount() {
+        document.addEventListener("keydown", this.keypressFunction, false);
         this.getTestcase();
+    }
+
+    componentWillUnmount(){
+        document.removeEventListener("keydown", this.keypressFunction, false);
     }
 
     getTestcase(){
@@ -92,6 +98,12 @@ class Testcase extends Component {
         $('#url-a').toggleClass("selected-url");
         $('#url-b').toggleClass("selected-url");
     }
+
+    keypressFunction(event){
+        if(event.keyCode === 32) {
+            this.switchFrames();
+        }
+      }
 
     render() {
         return (
