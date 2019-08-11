@@ -111,14 +111,14 @@ class Testcase extends Component {
 
                                     return (
                                        <option value={testcase.uuid} selected>
-                                            {testcase.name}
+                                            {i + 1} - {testcase.name}
                                        </option>
                                     );
                                 } else {
 
                                     return (
                                         <option value={testcase.uuid}>
-                                            {testcase.name}
+                                            {i + 1} - {testcase.name}
                                         </option>
                                     );
                                 }

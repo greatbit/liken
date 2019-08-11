@@ -59,7 +59,7 @@ class Launch extends Component {
                         this.state.launch.testcases.map(function(testcase, i){
                             return (
                                    <tr>
-                                       <td>{i}</td>
+                                       <td>{i + 1}</td>
                                        <td>
                                             <Link to={'/launch/' + this.props.match.params.launchId + '/' + testcase.uuid}>
                                                 {testcase.name}
@@ -79,7 +79,6 @@ class Launch extends Component {
                    loading={this.state.loading}
                  />
                </div>
-              Launch goes here
           </div>
         );
       }

@@ -98,6 +98,7 @@ code {
 
 .selected-url{
     background-color: rgba(40, 167, 69, 0.15);
+    border-radius: 7px;
 }
 
 .testcase-head-url{
