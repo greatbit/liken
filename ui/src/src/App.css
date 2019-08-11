@@ -105,4 +105,26 @@ code {
     font-size: 0.8em;
 }
 
+.select-RUNNING{
+    color: #007bff;
+}
 
+.select-RUNNABLE{
+    color: #007bff;
+}
+
+.select-PASSED{
+    color: #28a745;
+}
+
+.select-FAILED{
+    color: #dc3545;
+}
+
+.select-BROKEN{
+    color: #ffc107;
+}
+
+.select-SKIPPED{
+    color: grey;
+}

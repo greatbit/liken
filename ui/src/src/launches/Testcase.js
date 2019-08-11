@@ -110,14 +110,14 @@ class Testcase extends Component {
                                 if (this.state.testcase.uuid == testcase.uuid){
 
                                     return (
-                                       <option value={testcase.uuid} selected>
+                                       <option value={testcase.uuid} selected className={"select-" + testcase.status}>
                                             {i + 1} - {testcase.name}
                                        </option>
                                     );
                                 } else {
 
                                     return (
-                                        <option value={testcase.uuid}>
+                                        <option value={testcase.uuid} className={"select-" + testcase.status}>
                                             {i + 1} - {testcase.name}
                                         </option>
                                     );
