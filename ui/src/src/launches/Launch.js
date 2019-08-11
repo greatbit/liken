@@ -58,7 +58,7 @@ class Launch extends Component {
                     {
                         this.state.launch.testcases.map(function(testcase, i){
                             return (
-                                   <tr>
+                                   <tr className={"select-" + testcase.status}>
                                        <td>{i + 1}</td>
                                        <td>
                                             <Link to={'/launch/' + this.props.match.params.launchId + '/' + testcase.uuid}>
