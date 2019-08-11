@@ -35,6 +35,7 @@
             <xs:element name="id" type="xs:string"/>
             <xs:element name="externalUrl" type="xs:string"/>
             <xs:element name="uuid" type="xs:string"/>
+            <xs:element name="externalUuid" type="xs:string"/>
             <xs:element name="name" type="xs:string"/>
             <xs:element name="status" type="LaunchStatus"/>
             <xs:element name="description" type="xs:string"/>

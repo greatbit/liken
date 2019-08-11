@@ -78,8 +78,12 @@ public class LaunchService {
         ILock lock = hazelcastInstance.getLock(launchId);
         try{
             lock.lock(launchLockTimeout, TimeUnit.MILLISECONDS);
-            Testcase testcase = getLaunchTestcase(launchId, testcaseUUID);
             Launch launch = repository.findById(launchId).orElseThrow(EntityNotFoundException::new);
+            Testcase testcase = getLaunchTestcase(launch, testcaseUUID);
+            //Do not make finished testcase runnable on testcase switch
+            if (isTescaseFinished(testcase) && status == RUNNABLE){
+                return testcase;
+            }
             testcase.setStatus(status);
             launch.setLastModifiedTime(System.currentTimeMillis());
             repository.save(launch);
@@ -88,6 +92,10 @@ public class LaunchService {
             lock.unlock();
         }
 
+    }
+
+    private boolean isTescaseFinished(Testcase testcase) {
+        return testcase.getStatus() != RUNNABLE && testcase.getStatus() != RUNNING;
     }
 
     private void updateExternalTestcaseStatus(HttpServletRequest request, Launch launch, String testcaseUUID, LaunchStatus status) {
@@ -102,6 +110,10 @@ public class LaunchService {
 
     public Testcase getLaunchTestcase(String launchId, String testcaseUUID){
         Launch launch = repository.findById(launchId).orElseThrow(EntityNotFoundException::new);
+        return getLaunchTestcase(launch, testcaseUUID);
+    }
+
+    public Testcase getLaunchTestcase(Launch launch, String testcaseUUID){
         return launch.getTestcases().stream().
                 filter(testcase -> testcase.getUuid().equals(testcaseUUID)).
                 findFirst().orElseThrow(EntityNotFoundException::new);
