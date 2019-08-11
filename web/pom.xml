@@ -18,6 +18,12 @@
             <artifactId>services</artifactId>
         </dependency>
 
+        <!-- External Plugins -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>external-plugin</artifactId>
+        </dependency>
+
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>

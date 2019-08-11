@@ -14,7 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import ru.greatbit.plow.PluginsContainer;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
@@ -30,10 +29,10 @@ public class LaunchService {
     private long launchLockTimeout;
 
     @Autowired
-    private LaunchRepository repository;
+    private LikenExternalServicePlugin externalPlugin;
 
     @Autowired
-    private PluginsContainer pluginsContainer;
+    private LaunchRepository repository;
 
     @Autowired
     private HazelcastInstance hazelcastInstance;
@@ -99,13 +98,11 @@ public class LaunchService {
     }
 
     private void updateExternalTestcaseStatus(HttpServletRequest request, Launch launch, String testcaseUUID, LaunchStatus status) {
-        pluginsContainer.getPlugins(LikenExternalServicePlugin.class).values().
-                forEach(plugin -> plugin.updateExternalTestcaseStatus(request, launch, testcaseUUID, status));
+        externalPlugin.updateExternalTestcaseStatus(request, launch, testcaseUUID, status);
     }
 
     private void deleteExternal(HttpServletRequest request, String launchId) {
-        pluginsContainer.getPlugins(LikenExternalServicePlugin.class).values().
-                forEach(plugin -> plugin.deleteExternal(request, launchId));
+        externalPlugin.deleteExternal(request, launchId);
     }
 
     public Testcase getLaunchTestcase(String launchId, String testcaseUUID){
