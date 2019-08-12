@@ -22,7 +22,7 @@ class Launches extends Component {
     }
 
     componentDidMount() {
-        this.getLaunches();
+//        this.getLaunches();
         this.interval = setInterval(this.getLaunches, 30000);
     }
 
@@ -55,7 +55,7 @@ class Launches extends Component {
                        loading={this.state.loading}
                      />
                    </div>
-                  Launches goe here
+                  Please refer to the list of launches in your source test management system
               </div>
               <Footer/>
           </div>
