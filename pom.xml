@@ -29,9 +29,9 @@
     </organization>
 
     <scm>
-        <url>https://github.com/greatbit/liken.git</url>
-        <connection>https://github.com/quack/liken.git</connection>
-        <developerConnection>https://github.com/quack/liken.git</developerConnection>
+        <url>scm:git:git@github.com:greatbit/liken.git</url>
+        <connection>scm:git:git@github.com:greatbit/liken</connection>
+        <developerConnection>scm:git:git@github.com:greatbit/liken.git</developerConnection>
     </scm>
 
     <licenses>
