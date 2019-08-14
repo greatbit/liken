@@ -50,7 +50,7 @@
         <jackson.version>2.9.9</jackson.version>
         <sl4j.version>1.7.22</sl4j.version>
         <hazelcast.version>3.8</hazelcast.version>
-        <jaxb.version>0.11.1</jaxb.version>
+        <jaxb.version>1.11.1</jaxb.version>
         <whoru.version>1.1</whoru.version>
         <spring.boot.version>2.1.6.RELEASE</spring.boot.version>
         <plow.version>1.4</plow.version>
@@ -358,48 +358,6 @@
                 <version>${sl4j.version}</version>
             </dependency>
 
-            <!-- Camel -->
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-core</artifactId>
-                <version>${camel.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.sun.xml.bind</groupId>
-                        <artifactId>jaxb-core</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.sun.xml.bind</groupId>
-                        <artifactId>jaxb-impl</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-test</artifactId>
-                <version>${camel.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-test-spring</artifactId>
-                <version>${camel.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-aws</artifactId>
-                <version>${camel.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-spring</artifactId>
-                <version>${camel.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-jsonpath</artifactId>
-                <version>${camel.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
@@ -409,7 +367,7 @@
                 <plugin>
                     <groupId>org.jvnet.jaxb2.maven2</groupId>
                     <artifactId>maven-jaxb2-plugin</artifactId>
-                    <version>0.10.0</version>
+                    <version>0.14.0</version>
                     <executions>
                         <execution>
                             <id>xsd-generate</id>
