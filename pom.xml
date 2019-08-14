@@ -9,7 +9,7 @@
 
     <groupId>com.testquack.liken</groupId>
     <artifactId>liken</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <modules>
         <module>beans</module>
         <module>dal</module>
