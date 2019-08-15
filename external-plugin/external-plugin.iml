@@ -11,6 +11,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.jvnet.jaxb2_commons:jaxb2-basics-runtime:0.11.1" level="project" />
     <orderEntry type="module" module-name="beans" />
     <orderEntry type="library" name="Maven: org.jvnet.jaxb2_commons:jaxb2-basics-runtime:0.11.1" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
