@@ -17,8 +17,8 @@ class Launches extends Component {
     state = {
         launches: [],
         filter: {
-            skip: 0,
-            limit: 20
+            page: 0,
+            size: 20
         },
         pager: {
             total: 0,
@@ -49,7 +49,7 @@ class Launches extends Component {
                  that.state.pager.total = response.data.totalElements;
                  that.state.pager.current = response.data.number;
                  that.state.pager.itemsOnPage = response.data.size;
-                 this.state.pager.current =  this.state.filter.skip / this.state.filter.limit;
+                 this.state.pager.current =  this.state.filter.page;
                  that.state.loading = false;
                  that.setState(that.state);
         }).catch(error => {
@@ -76,14 +76,14 @@ class Launches extends Component {
 
     handlePageChanged(newPage) {
         this.state.pager.current = newPage;
-        this.state.filter.skip = newPage * this.state.pager.itemsOnPage;
+        this.state.filter.page = newPage;
         this.getLaunches(this);
         this.setState(this.state);
         this.updateUrl();
     }
 
     updateUrl(){
-        this.props.history.push("/" + this.props.match.params.project + '/launches?' + Utils.filterToQuery(this.state.filter));
+        this.props.history.push('/launches?' + Utils.filterToQuery(this.state.filter));
     }
 
     render() {
@@ -130,7 +130,7 @@ class Launches extends Component {
                         }
                         </tbody>
                     </table>
-                    <div>
+                    <div className="pager">
                         <Pager
                             totalItems={this.state.pager.total}
                             currentPage={this.state.pager.current}

@@ -90,7 +90,7 @@ export function filterToQuery(filter){
 export function queryToFilter(locationSearch){
     var params = qs.parse(locationSearch);
     var filter = {};
-    filter.skip = params.skip || 0;
-    filter.limit = params.limit || 20;
+    filter.skip = params.page || 0;
+    filter.limit = params.size || 20;
     return filter;
 }

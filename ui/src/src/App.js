@@ -21,7 +21,7 @@ class App extends Component {
             <main>
                 <Switch>
                   <Route exact path='/' component={Launches}/>
-                  <Route exact path='/launch/'
+                  <Route exact path='/launches/'
                       render={(props) => <Launches {...props}  /> }/>
                   <Route exact path='/launch/:launchId' render={(props) => <Launch {...props} /> }/>
                   <Route exact path='/launch/:launchId/:testcaseUuid' render={(props) => <Testcase {...props} /> }/>
