@@ -30,5 +30,5 @@ RUN mkdir -p /usr/liken/bin
 COPY assembly/startup.sh /usr/liken/bin
 
 EXPOSE 80
-ENTRYPOINT ["sh", "/usr/quack/bin/startup.sh"]
+ENTRYPOINT ["sh", "/usr/liken/bin/startup.sh"]
 
