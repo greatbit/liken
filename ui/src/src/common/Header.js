@@ -19,7 +19,7 @@ class Header extends Component {
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav mr-auto">
-                    <li className="nav-item"><Link className="nav-link" to={"/launch"}>Launches</Link></li>
+                    <li className="nav-item"><Link className="nav-link" to={"/launches"}>Launches</Link></li>
                 </ul>
             </div>
           </nav>

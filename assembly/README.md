@@ -1,4 +1,5 @@
 cd ../
+mvn clean install
 docker build -t liken .
 
 1. Run mongo
