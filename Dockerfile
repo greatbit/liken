@@ -7,8 +7,7 @@ FROM openjdk:8u212-slim-stretch
 
 #Application
 RUN mkdir -p /usr/liken
-COPY assembly/target/liken*.jar /usr/liken
-COPY assembly/target/lib /usr/liken/lib
+COPY assembly/target/liken.jar /usr/liken
 
 #Configs
 RUN mkdir -p /etc/liken
