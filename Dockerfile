@@ -27,7 +27,7 @@ RUN nginx
 
 #Startup
 RUN mkdir -p /usr/liken/bin
-COPY assembly/liken.sh /usr/liken/bin
+COPY assembly/startup.sh /usr/liken/bin
 
 EXPOSE 80
 ENTRYPOINT ["sh", "/usr/quack/bin/startup.sh"]
