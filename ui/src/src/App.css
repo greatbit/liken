@@ -128,3 +128,7 @@ code {
 .select-SKIPPED{
     color: grey;
 }
+
+.pager{
+    padding-bottom: 10px;
+}

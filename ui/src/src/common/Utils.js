@@ -78,3 +78,19 @@ export function timePassed(passedTime){
    }
    return passedTimeDisplayValue;
 }
+
+export function intDiv(val, by){
+    return (val - val % by) / by;
+}
+
+export function filterToQuery(filter){
+    return Object.keys(filter).map((key) => {return key + "=" + filter[key]}).join("&");
+}
+
+export function queryToFilter(locationSearch){
+    var params = qs.parse(locationSearch);
+    var filter = {};
+    filter.skip = params.page || 0;
+    filter.limit = params.size || 20;
+    return filter;
+}

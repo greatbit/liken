@@ -18,6 +18,7 @@
         <module>services</module>
         <module>web</module>
         <module>ui</module>
+        <module>assembly</module>
     </modules>
 
     <name>Liken</name>
