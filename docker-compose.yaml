@@ -1,0 +1,25 @@
+version: '2'
+services:
+  quack:
+    image: greatbit/quack
+    ports:
+      - "80:80"
+    links:
+      - mongod
+    depends_on:
+      - mongod
+
+  liken:
+    image: greatbit/liken
+    ports:
+      - "8081:80"
+    links:
+      - mongod
+    depends_on:
+      - mongod
+
+  mongod:
+    container_name: "mongod"
+    image: greatbit/quack-mongo-demo
+    ports:
+      - "27017:27017"
