@@ -5,6 +5,8 @@ import com.testquack.liken.beans.LaunchStatus;
 import com.testquack.liken.external.LikenExternalServicePlugin;
 import com.testquack.liken.external.error.ExternalPluginException;
 import com.testquack.client.HttpClientBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,8 @@ import java.io.IOException;
 import static org.springframework.util.StringUtils.isEmpty;
 
 public class QuackExternalPlugin implements LikenExternalServicePlugin {
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Value("${quack.api.endpoint}")
     private String quackApiEndpoint;
@@ -28,6 +32,8 @@ public class QuackExternalPlugin implements LikenExternalServicePlugin {
         if (isEmpty(launch.getMetadata().get(PROJECT_ID_META_KEY))){
             throw new ExternalPluginException("Project meta property is not set in Launch");
         }
+        logger.info("Sending request to QUACK: " + getClient(request).updateStatus(launch.getMetadata().get(PROJECT_ID_META_KEY).toString(),
+                launch.getExternalId(), testcaseUUID, status.toString()).request().url());
         try {
             int code = getClient(request).updateStatus(launch.getMetadata().get(PROJECT_ID_META_KEY).toString(),
                     launch.getExternalId(), testcaseUUID, status.toString()).execute().code();
