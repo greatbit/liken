@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
 @ImportResource("classpath:web-context.xml")
-@PropertySource(value={"classpath:liken.properties"}, ignoreResourceNotFound = true)
+@PropertySource(value={"classpath:liken.properties", "file/:liken.properties"}, ignoreResourceNotFound = true)
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

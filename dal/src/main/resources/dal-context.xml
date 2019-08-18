@@ -19,7 +19,7 @@
         <property name="localOverride" value="true"/>
         <property name="locations">
             <list>
-                <value>classpath*:liken.properties</value>
+                <value>classpath:liken.properties</value>
                 <value>file/:liken.properties</value>
             </list>
         </property>
