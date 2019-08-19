@@ -13,6 +13,10 @@ The idea is simple. Each testcases has 2 urls. One - the release candidate, anot
 
 The service features the list of testcases. You just have to switch between them, executing them one-by-one, by pressing a single button.
 
+![Comparison](https://raw.githubusercontent.com/greatbit/greatbit.github.io/master/liken/img/liken-compare.png)
+
+![Comparison in Action](https://raw.githubusercontent.com/greatbit/greatbit.github.io/master/liken/img/liken-short-low.gif)
+
 How to run test server using docker
 ==========
 1. Just run
