@@ -46,7 +46,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler>1.8</maven.compiler>
-        <spring.version>5.1.8.RELEASE</spring.version>
+        <spring.version>5.2.22.RELEASE</spring.version>
         <spring.data.version>2.1.9.RELEASE</spring.data.version>
         <jackson.version>2.9.9</jackson.version>
         <sl4j.version>1.7.22</sl4j.version>
